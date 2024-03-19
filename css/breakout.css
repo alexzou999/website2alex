@@ -58,6 +58,11 @@ h1 {
     padding: 20px;
     line-height: 1.5;
     transform: translateX(-400px);
+    transition: transform 1s ease-in-out;
+}
+
+.rules.show {
+    transform: translateX(0);
 }
 p {
     font-weight: bold;
