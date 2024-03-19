@@ -15,7 +15,11 @@ ball = {
 }
 
 //Draw ball on canvas
-function drawBall()
+function drawBall() {
+    ctx.beginPath()
+    ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2)
+    ctx.stroke()
+}
 
 //Rules open and close event handlers
 rulesBtn.addEventListener('click', () => {
