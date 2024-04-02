@@ -75,21 +75,21 @@ function drawPaddle() {
 // Draw score on canvas
 function drawScore() {
     ctx.font = '20px Arial'
-    ctx.fillText(`Score: ${score}`, canvas.width-100, 30)
+    ctx.fillText(`Score: ${score}`, canvas.width - 100, 30)
 }
 
 
 // Draw bricks on canvas
 function drawBricks() {
-bricks.forEach(column => {
-    column.forEach(brick => {
-        ctx.beginPath()
-        ctx.rect(brick.x, brick.y, brick.w, brick.h)
-        ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
-        ctx.fill
-        ctx.closePath()
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            ctx.beginPath()
+            ctx.rect(brick.x, brick.y, brick.w, brick.h)
+            ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+            ctx.fill
+            ctx.closePath()
+        })
     })
- })
 }
 
 // Draw everything
@@ -110,7 +110,7 @@ function movePaddle() {
 if (paddle.x < 0) {
     paddle.x = 0
 }
-if (paddle.x + paddle.w > canvas.width){
+if (paddle.x + paddle.w > canvas.width) {
     paddle.x = canvas.width - paddle.w
 }
 
@@ -120,24 +120,26 @@ function keyDown(e) {
     if (e.key == 'ArrowRight' || e.key == 'Right') {
         paddle.dx = paddle.speed
     }
-    if (e.key == 'ArrowLeft' || e.key == 'Left'){
+    if (e.key == 'ArrowLeft' || e.key == 'Left') {
         paddle.dx = -paddle.speed
-    }}
+    }
+}
 
 // Keyup Event
 function keyUp(e) {
-    if (e.key == 'ArrowRight' || e.key == 'Right'|| e.key == 'ArrowLeft' || e.key == 'Left'){
-    paddle.dx = 0
-    }}
+    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'ArrowLeft' || e.key == 'Left') {
+        paddle.dx = 0
+    }
+}
 
 // Keyboard event handlers
 document.addEventListener('keydown', keyDown)
 document.addEventListener('keyup', keyUp)
 
 function moveBall() {
- ball.x = ball.x + ball.dx
- ball.y= ball.y + ball.dy
-}
+    ball.x = ball.x + ball.dx
+    ball.y = ball.y + ball.dy
+
 
 // wall collision (top)
 if (ball.y + ball.size < 0) {
@@ -152,20 +154,59 @@ if (ball.x + ball.size > canvas.width) {
 // wall collision (bottom)
 if (ball.y + ball.size > canvas.height) {
     ball.dy = -1 * ball.dy
+    showAllBricks()
+    score = 0
 }
 //wall collision (left)
 if (ball.x + ball.size < 0) {
     ball.dx = -1 * ball.dx
 }
+}
 
 // paddle collision
- if (
+if (
     ball.x - ball.size > paddle.x &&
-     ball.x + ball.size < paddle.x + paddle.w &&
-    ball.y + ball.size < paddle.y
- ) {
-    ball.dy = -1 * ball.dy
- }
+    ball.x + ball.size < paddle.x + paddle.w &&
+    ball.y + ball.size > paddle.y
+) {
+    ball.dy = -1 * ball.speed
+}
+
+// Brick collision
+bricks.forEach(column => {
+    column.forEach(brick => {
+        if (brick.visible) {
+            if (
+                ball.x - ball.size > brick.x && // left brick side
+                ball.x + ball.size < brick.x + brick.w && // right
+                ball.y + ball.size > brick.y && // top
+                ball.y - ball.size < brick.y + brick.h // bottom
+            ) {
+                ball.dy = -1 * ball.dy
+                brick.visible = false
+                increaseScore()
+            }
+        }
+    })
+})
+
+// increase score
+function increaseScore() {
+    score++
+
+    if (score == brickRowCount * brickColumnCount) {
+        score = 0
+        showAllBricks()
+    }
+}
+// Shows all bricks
+function showAllBricks(){
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            brick.visible = true
+        })
+    })
+}
 
 // Update canvas drawing and do the animation
 function update() {
