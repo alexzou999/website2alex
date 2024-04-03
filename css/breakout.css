@@ -64,6 +64,7 @@ h1 {
 .rules.show {
     transform: translateX(0);
 }
+
 p {
     font-weight: bold;
 }

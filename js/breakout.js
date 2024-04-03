@@ -141,26 +141,26 @@ function moveBall() {
     ball.y = ball.y + ball.dy
 
 
-// wall collision (top)
-if (ball.y + ball.size < 0) {
-    ball.dy = -1 * ball.dy
-}
+    // wall collision (top)
+    if (ball.y + ball.size < 0) {
+        ball.dy = -1 * ball.dy
+    }
 
-// wall collision (right)
-if (ball.x + ball.size > canvas.width) {
-    ball.dx = -1 * ball.dx
-}
+    // wall collision (right)
+    if (ball.x + ball.size > canvas.width) {
+        ball.dx = -1 * ball.dx
+    }
 
-// wall collision (bottom)
-if (ball.y + ball.size > canvas.height) {
-    ball.dy = -1 * ball.dy
-    showAllBricks()
-    score = 0
-}
-//wall collision (left)
-if (ball.x + ball.size < 0) {
-    ball.dx = -1 * ball.dx
-}
+    // wall collision (bottom)
+    if (ball.y + ball.size > canvas.height) {
+        ball.dy = -1 * ball.dy
+        showAllBricks()
+        score = 0
+    }
+    //wall collision (left)
+    if (ball.x + ball.size < 0) {
+        ball.dx = -1 * ball.dx
+    }
 }
 
 // paddle collision
@@ -200,7 +200,7 @@ function increaseScore() {
     }
 }
 // Shows all bricks
-function showAllBricks(){
+function showAllBricks() {
     bricks.forEach(column => {
         column.forEach(brick => {
             brick.visible = true
