@@ -40,8 +40,8 @@ ball = {
     y: canvas.height / 2,
     size: 10,
     speed: 4,
-    dx: 4;
-    dy: -4;
+    dx: 4,
+    dy: -4,
 }
 
 // Create Paddle properties
@@ -86,7 +86,7 @@ function drawBricks() {
             ctx.beginPath()
             ctx.rect(brick.x, brick.y, brick.w, brick.h)
             ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
-            ctx.fill
+            ctx.fill()
             ctx.closePath()
         })
     })
@@ -156,12 +156,13 @@ function moveBall() {
         ball.dy = -1 * ball.dy
         showAllBricks()
         score = 0
+        cancelAnimationFrame()
     }
     //wall collision (left)
     if (ball.x + ball.size < 0) {
         ball.dx = -1 * ball.dx
     }
-}
+
 
 // paddle collision
 if (
@@ -189,7 +190,7 @@ bricks.forEach(column => {
         }
     })
 })
-
+}
 // increase score
 function increaseScore() {
     score++
@@ -197,6 +198,7 @@ function increaseScore() {
     if (score == brickRowCount * brickColumnCount) {
         score = 0
         showAllBricks()
+        cancelAnimationFrame()
     }
 }
 // Shows all bricks
@@ -210,7 +212,7 @@ function showAllBricks() {
 
 // Update canvas drawing and do the animation
 function update() {
-    mvoeBall()
+    moveBall()
     movePaddle()
     draw()
     requestAnimationFrame(update)
