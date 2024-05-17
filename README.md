@@ -1,3 +1,4 @@
 My 2nd website
 
-<p>Click This Link --></p> <a href="index2.html">Homepage</a>
+<p>Click The Link Below </p> 
+<a href="index2.html">Homepage</a>
