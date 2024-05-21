@@ -114,7 +114,45 @@ h1 {
     transition: transform 0.4s ease-in;
 }
 
+.winmessage {
+    opacity: 0;
+    line-height: 1.7;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    transition: transform 0.4s ease-in;
+    bottom: 100px;
+}
+
+.losemessage {
+    opacity: 0;
+    line-height: 1.7;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    transition: transform 0.4s ease-in;
+    bottom: 100px;
+}
+
 .message.visible {
+    transform: translate(-50%, 150%);
+    opacity: 1;
+}
+
+.winmessage.visible {
+    transform: translate(-50%, 150%);
+    opacity: 1;
+}
+
+.losemessage.visible {
     transform: translate(-50%, 150%);
     opacity: 1;
 }

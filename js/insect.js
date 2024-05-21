@@ -70,8 +70,15 @@ function addInsects() {
 
 function increaseScore() {
     score++
-    if (score > 19) {
+    if (seconds > 19) {
         message.classList.add('visible')
+    }
+    if (score > 60 && seconds < 30|| score == 60 && seconds < 30) {
+        winmessage.classList.add('visible')
+    }
+    else if (score < 60 && seconds > 30)
+    {
+        losemessage.classList.add('visible')
     }
     scoreEl.innerHTML = `Score: ${score}`
 }
